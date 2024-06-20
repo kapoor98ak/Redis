@@ -75,18 +75,19 @@ Extend the SET command to support the EX, PX, EXAT, and PXAT expiry options. Ens
 ### Step Six: Additional Commands
 Implement additional commands:
 
-EXISTS: Check if a key is present.
-DEL: Delete one or more keys.
-INCR: Increment a stored number by one.
-DECR: Decrement a stored number by one.
-LPUSH: Insert values at the head of a list.
-RPUSH: Insert values at the tail of a list.
-SAVE: Save the database state to disk and implement load on startup.
-Step Seven: Performance Testing
+0. EXISTS: Check if a key is present.
+0. DEL: Delete one or more keys.
+0. INCR: Increment a stored number by one.
+0. DECR: Decrement a stored number by one.
+0. LPUSH: Insert values at the head of a list.
+0. RPUSH: Insert values at the tail of a list.
+0. SAVE: Save the database state to disk and implement load on startup.
+
+### Step Seven: Performance Testing
 Use Redis Benchmark to test the performance of your server. Compare your server's performance with the original Redis server.
 
-```bash
 
+```bash
 % redis-benchmark -t SET,GET -q
 SET: 108225.10 requests per second, p50=0.223 msec
 GET: 115606.94 requests per second, p50=0.215 msec
