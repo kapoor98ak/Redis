@@ -1,3 +1,9 @@
+# import sys
+# import os
+
+# # Add the parent directory to the Python path
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from pyredis.types import Array, BulkString, Error, Integer, SimpleString
 
 
@@ -65,3 +71,6 @@ def extract_frame_from_buffer(buffer):
 
                 return Array(array), separator + _MSG_SEPARATOR_SIZE
     return None, 0
+
+def encode_message(message):
+    return message.resp_encode()

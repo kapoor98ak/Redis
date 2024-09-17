@@ -1,6 +1,13 @@
+import sys
+import os
+
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 import pytest
 
-from pyredis.protocol import extract_frame_from_buffer
+from pyredis.protocol import (extract_frame_from_buffer, encode_message)
 from pyredis.types import (
     Array,
     BulkString,
@@ -58,6 +65,33 @@ from pyredis.types import (
         ),
     ],
 )
+
 def test_read_frame(buffer, expected):
     actual = extract_frame_from_buffer(buffer)
     assert actual == expected
+
+@pytest.mark.parametrize(
+    "message, expected",
+    [
+        (SimpleString("OK"), b"+OK\r\n"),
+        (Error("Error"), b"-Error\r\n"),
+        (Integer(100), b":100\r\n"),
+        (BulkString("This is a Bulk String"), b"$21\r\nThis is a Bulk String\r\n"),
+        (BulkString(""), b"$0\r\n\r\n"),
+        (BulkString(None), b"$-1\r\n"),
+        (Array([]), b"*0\r\n"),
+        (Array(None), b"*-1\r\n"),
+        (
+            Array([SimpleString("String"), Integer(2), SimpleString("String2")]),
+            b"*3\r\n+String\r\n:2\r\n+String2\r\n",
+        ),
+    ],
+)
+
+def test_encode_message(message, expected):
+    encoded_message = encode_message(message)
+    assert encoded_message == expected
+
+# def test_encode_simple_string():
+#     input = SimpleString("Hello")
+#     assert "+Hello\r\n".encode() == encode_message(input)
