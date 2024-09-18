@@ -1,8 +1,8 @@
-# import sys
-# import os
+import sys
+import os
 
-# # Add the parent directory to the Python path
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from pyredis.types import Array, BulkString, Error, Integer, SimpleString
 

@@ -1,16 +1,39 @@
 # Build Your Own Redis Server
 
-Welcome to the "Build Your Own Redis Server" challenge repository! This project involves creating a lite version of Redis, an in-memory data structure server. The goal is to support operations similar to the original Redis server.
+Welcome to the Redis-lite repository! This project involves creating a lite version of Redis, an in-memory data structure server. The goal is to support operations similar to the original Redis server.
+
+## Introduction
+Redis is a famous in-memory data structure store that serves as a database, cache, and message broker. Known for its versatility and performance, Redis supports a variety of data types, including strings, hashes, lists, sets, and sorted sets. It is widely used in applications requiring high-speed data access, real-time analytics, and caching.
+
+## Project Objective
+This project aims to create a lightweight, Python-based version of Redis, termed "Redis Lite." The goal is to replicate essential functionalities of Redis while simplifying its core operations. This project will focus on understanding and implementing the core concepts behind Redis, including:
+
+- **Redis Serialization Protocol (RESP)**: I implemented my version of the communication protocol used by Redis, which defines how data is serialized and deserialized between the server and clients.
+- **Basic Commands**: Implemented fundamental commands such as SET and GET, which are crucial for data storage and retrieval.
+- **Concurrency**: Handled simultaneous multiple client connections to mimic Redis’s ability to manage concurrent requests.
+- **Expiry Mechanisms**: Added support for command expiry options to understand Redis’s data expiration capabilities.
+- **Additional Commands**: Expanded functionality to include various Redis commands such as EXISTS, DEL, INCR, DECR, LPUSH, and RPUSH.
+- **Performance Testing**: Compare the performance of your Redis Lite server against the official Redis server to assess efficiency and speed.
+
+## Educational Goals
+By building this Redis Lite server, I gained hands-on experience with:
+
+- **Network Programming**: Learnt to manage client-server communication over TCP/IP in Python.
+- **Serialization Protocols**: Understood how data is encoded and decoded in a real-world system.
+- **Concurrency Models**: Explored multi-threading or asynchronous approaches to handle multiple simultaneous connections.
+- **System Design**: Develop a deeper understanding of how in-memory data stores are designed and optimized.
+
+This project was an excellent opportunity to delve into the inner workings of Redis and gain practical experience in building a high-performance data structure server.
 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Challenge Overview](#challenge-overview)
+- [Project Overview](#project-overview)
 - [Setup](#setup)
 - [Steps](#steps)
   - [Step Zero: Environment Setup](#step-zero-environment-setup)
   - [Step One: RESP Serialization/Deserialization](#step-one-resp-serializationdeserialization)
-  - [Step Two: Building the Server](#step-two-building-the-server)
+  - [Step Two: Building the Redis Server](#step-two-building-the-server)
   - [Step Three: Core Functionality - SET and GET](#step-three-core-functionality---set-and-get)
   - [Step Four: Handling Concurrent Clients](#step-four-handling-concurrent-clients)
   - [Step Five: SET Command Expiry Options](#step-five-set-command-expiry-options)
@@ -21,27 +44,27 @@ Welcome to the "Build Your Own Redis Server" challenge repository! This project 
 
 ## Introduction
 
-Redis is an in-memory data structure server supporting strings, hashes, lists, sets, sorted sets, and more. This challenge is inspired by Redis's original goal as a Remote Dictionary Server. We will build a lite version of Redis supporting similar operations, implemented in Python.
+Redis is an in-memory data structure server supporting strings, hashes, lists, sets, sorted sets, and more. This project is inspired by Redis's original goal as a REmote DIctionary Server. To do this, I built a lite version of Redis supporting similar operations, implemented in Python.
 
-## Challenge Overview
+## Project Overview
 
-The challenge is divided into several steps, each focusing on different aspects of building a Redis server:
+The project is divided into several steps, each focusing on different aspects of building a Redis server:
 
-1. **Environment Setup**: Preparing the development environment.
-2. **RESP Serialization/Deserialization**: Implementing the Redis Serialization Protocol.
-3. **Building the Server**: Creating a server that listens for client connections and handles basic commands.
-4. **Core Functionality**: Implementing the SET and GET commands.
-5. **Concurrent Clients**: Handling multiple client connections concurrently.
-6. **SET Command Expiry Options**: Extending the SET command to support expiry options.
-7. **Additional Commands**: Implementing commands like EXISTS, DEL, INCR, DECR, LPUSH, RPUSH, and SAVE.
-8. **Performance Testing**: Comparing performance with the original Redis.
+1. **Environment Setup**: Prepare the development environment.
+2. **RESP Serialization/Deserialization**: Implement the Redis Serialization Protocol.
+3. **Building the Server**: Create a server that listens for client connections and handles basic commands.
+4. **Core Functionality**: Implement the SET and GET commands.
+5. **Concurrent Clients**: Handle multiple client connections concurrently.
+6. **SET Command Expiry Options**: Extend the SET command to support expiry options.
+7. **Additional Commands**: Implement commands like EXISTS, DEL, INCR, DECR, LPUSH, RPUSH, and SAVE.
+8. **Performance Testing**: Compare performance with the original Redis.
 
 ## Setup
 
 To get started, clone this repository and set up your development environment. Ensure you have Python installed and optionally install Redis for testing purposes.
 
 ```bash
-git clone https://github.com/your-username/redis-lite.git
+git clone https://github.com/kapoor98ak/redis-lite.git
 cd redis-lite
 ```
 
