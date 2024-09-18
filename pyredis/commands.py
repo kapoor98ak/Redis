@@ -8,7 +8,7 @@ def _handle_echo(command):
     return Error("ERR wrong number of arguments for 'echo' command")
 
 
-def _handle_ping(command, _):
+def _handle_ping(command, _=None):
     if len(command) == 1:
         return SimpleString("PONG")
     elif len(command) == 2:
