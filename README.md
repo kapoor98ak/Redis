@@ -116,7 +116,9 @@ SET: 108225.10 requests per second, p50=0.223 msec
 GET: 115606.94 requests per second, p50=0.215 msec
 ```
 
+## More features:
 
+- **Implemented CI using Github Actions**: Referred [Github Documentation](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python)
 
 
 
