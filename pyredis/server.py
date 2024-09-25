@@ -7,7 +7,7 @@ from pyredis.protocol import encode_message, extract_frame_from_buffer
 RECV_SIZE = 2048
 
 
-def handle_client_connection(client_socket):
+def handle_client_connection(client_socket, datastore):
     buffer = bytearray()
 
     try:
@@ -23,7 +23,7 @@ def handle_client_connection(client_socket):
 
             if frame:
                 buffer = buffer[frame_size:]
-                result = handle_command(frame)
+                result = handle_command(frame, datastore)
                 client_socket.send(encode_message(result))
     finally:
         client_socket.close()
@@ -32,7 +32,6 @@ def handle_client_connection(client_socket):
 class Server:
     def __init__(self, port):
         self.port = port
-        self._running = False
         self._datastore = DataStore()
 
     def run(self):
@@ -47,7 +46,5 @@ class Server:
 
             while self._running:
                 connection, _ = server_socket.accept()
-                handle_client_connection(connection, self._datastore)
 
-    def stop(self):
-        self._running = False
+                handle_client_connection(connection, self._datastore)

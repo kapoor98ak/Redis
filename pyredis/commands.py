@@ -9,13 +9,11 @@ def _handle_echo(command, datastore):
 
 
 def _handle_ping(command, datastore):
-    if len(command) == 1:
-        return SimpleString("PONG")
-    elif len(command) == 2:
+    if len(command) > 1:
         message = command[1].data.decode()
         return BulkString(f"{message}")
-    else:
-        return Error("ERR wrong number of arguments for 'ping' command")
+    return SimpleString("PONG")
+
 
 def _handle_set(command, datastore):
     if len(command) >= 3:
@@ -36,13 +34,15 @@ def _handle_get(command, datastore):
         return BulkString(value)
     return Error("ERR wrong number of arguments for 'get' command")
 
+
 def _handle_unrecognised_command(command):
     args = " ".join((f"'{c.data.decode()}'" for c in command[1:]))
     return Error(
         f"ERR unknown command '{command[0].data.decode()}', with args beginning with: {args}"
     )
 
-def handle_command(command):
+
+def handle_command(command, datastore):
     match command[0].data.decode().upper():
         case "ECHO":
             return _handle_echo(command, datastore)
