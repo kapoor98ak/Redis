@@ -1,4 +1,5 @@
 import socket
+import threading
 
 from pyredis.commands import handle_command
 from pyredis.datastore import DataStore
@@ -32,6 +33,7 @@ def handle_client_connection(client_socket, datastore):
 class Server:
     def __init__(self, port):
         self.port = port
+        self._running = False
         self._datastore = DataStore()
 
     def run(self):
@@ -47,4 +49,10 @@ class Server:
             while self._running:
                 connection, _ = server_socket.accept()
 
-                handle_client_connection(connection, self._datastore)
+                client_handler = threading.Thread(
+                    target=handle_client_connection, args=(connection, self._datastore)
+                )
+                client_handler.start()
+
+    def stop(self):
+        self._running = False
